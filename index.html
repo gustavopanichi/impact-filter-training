@@ -482,12 +482,12 @@ Use the reference appendix for detailed definitions, trigger criteria, SME logic
           <h3>Upload the reference files</h3>
           <p>The project needs two knowledge files. Download them below and upload under <strong>Files</strong> in your project settings.</p>
           <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
-            <a href="https://raw.githubusercontent.com/gustavopanichi/impact-filter-training/main/02-reference-appendix.md" download class="dl-btn">
+            <button onclick="forceDownload('https://raw.githubusercontent.com/gustavopanichi/impact-filter-training/main/02-reference-appendix.md','02-reference-appendix.md')" class="dl-btn">
               ↓ 02-reference-appendix.md
-            </a>
-            <a href="https://raw.githubusercontent.com/gustavopanichi/impact-filter-training/main/03-team-structure.md" download class="dl-btn">
+            </button>
+            <button onclick="forceDownload('https://raw.githubusercontent.com/gustavopanichi/impact-filter-training/main/03-team-structure.md','03-team-structure.md')" class="dl-btn">
               ↓ 03-team-structure.md
-            </a>
+            </button>
           </div>
           <p style="margin-top:10px;font-size:13px;color:var(--ink-muted);">These give the tool its knowledge of SketchDeck accounts and the Impact Filter framework. Without them, it can't route to the right DD or check SME thresholds.</p>
         </div>
@@ -727,6 +727,19 @@ function copyInstructions() {
       btn.style.color = '#161638';
     }, 2000);
   });
+}
+function forceDownload(url, filename) {
+  fetch(url)
+    .then(function(r) { return r.blob(); })
+    .then(function(blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
 }
 </script>
 

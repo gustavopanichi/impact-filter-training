@@ -289,6 +289,41 @@
         <div class="step-text">
           <h3>Create a new project</h3>
           <p>In Claude, click <strong>Projects → Create project</strong>. Name it something like "Impact Filter" and give it a short description.</p>
+          <div class="step-img">
+            <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+              <!-- Sidebar -->
+              <rect x="0" y="0" width="160" height="280" fill="#eae8e2"/>
+              <!-- Sidebar items -->
+              <text x="20" y="30" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#161638" letter-spacing="0">claude.ai</text>
+              <rect x="12" y="48" width="136" height="28" rx="6" fill="#ddddd5"/>
+              <text x="24" y="67" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">Recents</text>
+              <rect x="12" y="84" width="136" height="28" rx="6" fill="#ddddd5"/>
+              <text x="24" y="103" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">Starred</text>
+              <!-- Projects heading -->
+              <text x="20" y="138" font-family="Inter,sans-serif" font-size="10" fill="#999990" letter-spacing="0">PROJECTS</text>
+              <!-- Create project button - highlighted -->
+              <rect x="12" y="150" width="136" height="32" rx="8" fill="#d8de00"/>
+              <text x="80" y="171" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#161638" text-anchor="middle" letter-spacing="0">+ Create project</text>
+              <!-- Arrow -->
+              <line x1="155" y1="166" x2="180" y2="166" stroke="#161638" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <circle cx="155" cy="166" r="3" fill="#161638"/>
+
+              <!-- Main area: create project dialog -->
+              <rect x="190" y="30" width="310" height="220" rx="12" fill="#FFFFFF"/>
+              <text x="210" y="62" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#161638" letter-spacing="0">Create project</text>
+              <!-- Name field -->
+              <text x="210" y="92" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Project name</text>
+              <rect x="210" y="100" width="270" height="34" rx="8" fill="#f5f5f0" stroke="#c0c0b8" stroke-width="1"/>
+              <text x="222" y="122" font-family="Inter,sans-serif" font-size="13" fill="#161638" letter-spacing="0">Impact Filter</text>
+              <!-- Description field -->
+              <text x="210" y="156" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Description</text>
+              <rect x="210" y="164" width="270" height="34" rx="8" fill="#f5f5f0" stroke="#c0c0b8" stroke-width="1"/>
+              <text x="222" y="186" font-family="Inter,sans-serif" font-size="12" fill="#999990" letter-spacing="0">PM intake assessment tool...</text>
+              <!-- Create button -->
+              <rect x="390" y="212" width="90" height="28" rx="14" fill="#161638"/>
+              <text x="435" y="231" font-family="Inter,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="0">Create</text>
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -297,6 +332,32 @@
         <div class="step-text">
           <h3>Add the system instructions</h3>
           <p>In the project settings, find the <strong>Instructions</strong> field. Paste the full prompt below. This is what tells Claude how to behave — the path logic, trigger criteria, output format, everything.</p>
+          <div class="step-img">
+            <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+              <!-- Right panel header -->
+              <text x="28" y="32" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#161638" letter-spacing="0">Instructions</text>
+              <text x="290" y="32" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">All project users</text>
+              <!-- Edit icon hint -->
+              <rect x="460" y="16" width="32" height="24" rx="6" fill="#eae8e2"/>
+              <text x="476" y="33" font-family="Inter,sans-serif" font-size="14" fill="#999990" text-anchor="middle" letter-spacing="0">✎</text>
+
+              <!-- Instructions text area - highlighted -->
+              <rect x="28" y="48" width="464" height="180" rx="10" fill="#FFFFFF" stroke="#d8de00" stroke-width="2.5"/>
+              <text x="44" y="72" font-family="Inter,sans-serif" font-size="12" fill="#161638" letter-spacing="0">You are the Impact Filter.</text>
+              <text x="44" y="92" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">Your job is to analyze messy intake inputs</text>
+              <text x="44" y="108" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">such as briefs, emails, Slack messages, and</text>
+              <text x="44" y="124" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">call notes, then produce a structured intake</text>
+              <text x="44" y="140" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">assessment for the PM.</text>
+              <text x="44" y="164" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">## Core rules</text>
+              <text x="44" y="180" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">- Always run the full analysis...</text>
+              <!-- Fade -->
+              <rect x="28" y="198" width="464" height="30" rx="0" fill="url(#fade2)"/>
+              <defs><linearGradient id="fade2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="1"/></linearGradient></defs>
+
+              <!-- Arrow + label -->
+              <text x="260" y="252" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" text-anchor="middle" letter-spacing="0">Paste the prompt from below into this field</text>
+            </svg>
+          </div>
 
           <div style="margin-top:12px;">
             <button onclick="toggleInstructions()" style="font-family:var(--sans);font-size:13px;font-weight:700;color:var(--ink);background:var(--bg-card-on-white);border:none;border-radius:8px;padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s;">
@@ -481,6 +542,33 @@ Use the reference appendix for detailed definitions, trigger criteria, SME logic
         <div class="step-text">
           <h3>Upload the reference files</h3>
           <p>The project needs two knowledge files. Download them below and upload under <strong>Files</strong> in your project settings.</p>
+          <div class="step-img">
+            <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+              <!-- Files header -->
+              <text x="28" y="32" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#161638" letter-spacing="0">Files</text>
+              <text x="290" y="32" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">All project users</text>
+              <!-- + button -->
+              <rect x="460" y="14" width="32" height="28" rx="6" fill="#d8de00"/>
+              <text x="476" y="33" font-family="Inter,sans-serif" font-size="18" fill="#161638" text-anchor="middle" letter-spacing="0">+</text>
+
+              <!-- Capacity bar -->
+              <rect x="28" y="50" width="464" height="4" rx="2" fill="#e0e0d8"/>
+              <rect x="28" y="50" width="16" height="4" rx="2" fill="#5090d0"/>
+              <text x="28" y="70" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">1% of project capacity used</text>
+
+              <!-- File card 1 -->
+              <rect x="28" y="88" width="220" height="100" rx="10" fill="#FFFFFF" stroke="#d8de00" stroke-width="2"/>
+              <text x="44" y="118" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">02-reference-</text>
+              <text x="44" y="136" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">appendix.md</text>
+              <text x="44" y="168" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">271 lines</text>
+
+              <!-- File card 2 -->
+              <rect x="264" y="88" width="220" height="100" rx="10" fill="#FFFFFF" stroke="#d8de00" stroke-width="2"/>
+              <text x="280" y="118" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">03-team-</text>
+              <text x="280" y="136" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">structure.md</text>
+              <text x="280" y="168" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">176 lines</text>
+            </svg>
+          </div>
           <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
             <button onclick="forceDownload('https://raw.githubusercontent.com/gustavopanichi/impact-filter-training/main/02-reference-appendix.md','02-reference-appendix.md')" class="dl-btn">
               ↓ 02-reference-appendix.md
@@ -498,6 +586,27 @@ Use the reference appendix for detailed definitions, trigger criteria, SME logic
         <div class="step-text">
           <h3>Start chatting</h3>
           <p>Open the project, start a new conversation, and paste your first intake.</p>
+          <div class="step-img">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+              <!-- Project header -->
+              <text x="28" y="28" font-family="Inter,sans-serif" font-size="12" fill="#999990" letter-spacing="0">← All projects</text>
+              <text x="28" y="58" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#161638" letter-spacing="0">Impact Filter</text>
+
+              <!-- Chat input -->
+              <rect x="28" y="80" width="464" height="70" rx="10" fill="#FFFFFF" stroke="#d8de00" stroke-width="2.5"/>
+              <text x="48" y="108" font-family="Inter,sans-serif" font-size="13" fill="#b0b0a8" letter-spacing="0">Type / for skills</text>
+              <text x="48" y="136" font-family="Inter,sans-serif" font-size="16" fill="#b0b0a8" letter-spacing="0">+</text>
+              <text x="380" y="138" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Opus 4.6 ▾</text>
+
+              <!-- Tabs below -->
+              <rect x="28" y="170" width="90" height="26" rx="13" fill="#e8e8e0"/>
+              <text x="73" y="188" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#161638" text-anchor="middle" letter-spacing="0">Your chats</text>
+              <text x="140" y="188" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Activity</text>
+
+              <!-- Empty state -->
+              <text x="260" y="228" font-family="Inter,sans-serif" font-size="13" fill="#999990" text-anchor="middle" letter-spacing="0">No chats yet — paste your first brief above</text>
+            </svg>
+          </div>
         </div>
       </div>
 

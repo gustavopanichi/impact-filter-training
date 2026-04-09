@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact Filter — PM Training Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-blue: #c0d8ff;
+    --bg-white: #FFFFFF;
+    --bg-card-on-blue: rgba(22,22,56,0.05);
+    --bg-card-on-blue-hover: rgba(22,22,56,0.08);
+    --bg-card-on-white: rgba(22,22,56,0.03);
+    --bg-card-on-white-hover: rgba(22,22,56,0.06);
+    --ink: #161638;
+    --ink-mid: rgba(22,22,56,0.7);
+    --ink-muted: rgba(22,22,56,0.5);
+    --ink-dim: rgba(22,22,56,0.3);
+    --yellow: #d8de00;
+    --yellow-soft: rgba(216,222,0,0.12);
+    --yellow-border: rgba(216,222,0,0.4);
+    --border-on-blue: rgba(22,22,56,0.08);
+    --border-on-white: rgba(22,22,56,0.1);
+    --radius: 12px;
+    --radius-lg: 16px;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 0;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    font-weight: 400;
+    background: var(--bg-blue);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0;
+  }
+  ::selection { background: var(--ink); color: var(--bg-white); }
+  strong, b { font-weight: 700; }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .narrow {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ── SLICES ── */
+  .slice {
+    padding: 5rem 2rem;
+  }
+  .slice.blue { background: var(--bg-blue); }
+  .slice.white { background: var(--bg-white); }
+
+  /* card/border colors adapt to slice */
+  .slice.blue .card,
+  .slice.blue .anatomy,
+  .slice.blue .path-card,
+  .slice.blue .table-wrap,
+  .slice.blue .example-block { background: #FFFFFF; border: none; }
+  .slice.blue .card:hover { background: #f5f5f8; }
+  .slice.blue .step-row,
+  .slice.blue .faq-item,
+  .slice.blue .anatomy-top,
+  .slice.blue .sme-table td,
+  .slice.blue .sme-table th,
+  .slice.blue .path-card .examples { border-color: var(--border-on-blue); }
+  .slice.blue .gotcha {
+    background: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .slice.blue .gotcha:last-child { margin-bottom: 0; }
+
+  .slice.white .card,
+  .slice.white .anatomy,
+  .slice.white .path-card,
+  .slice.white .table-wrap,
+  .slice.white .example-block { background: var(--bg-card-on-white); border: none; }
+  .slice.white .card:hover { background: var(--bg-card-on-white-hover); }
+  .slice.white .step-row,
+  .slice.white .gotcha,
+  .slice.white .faq-item,
+  .slice.white .anatomy-top,
+  .slice.white .sme-table td,
+  .slice.white .sme-table th,
+  .slice.white .path-card .examples { border-color: var(--border-on-white); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg-blue);
+    padding: 8rem 2rem 5rem;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--ink-mid);
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--bg-white);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 14px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .hero-btn:hover { opacity: 0.85; }
+
+  /* ── SECTION TEXT ── */
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .slice h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .slice .lead {
+    font-size: 16px;
+    color: var(--ink-mid);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0;
+  }
+
+  /* ── STEPS ── */
+  .step-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border-on-blue);
+    align-items: start;
+  }
+  .step-row:last-child { border-bottom: none; }
+  .step-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .step-text h3 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .step-text p {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    letter-spacing: 0;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .card {
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: background 0.15s;
+  }
+  .card-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+
+  /* ── PATH CARDS ── */
+  .path-card {
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 14px;
+  }
+  .path-pill {
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 4px 14px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    border: none;
+    background: var(--bg-card-on-white);
+    color: var(--ink);
+  }
+  .path-card h3 {
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .path-card .desc {
+    font-size: 15px;
+    color: var(--ink-mid);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0;
+  }
+  .path-card .examples {
+    font-size: 13px;
+    color: var(--ink-muted);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-on-blue);
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+
+  /* ── ANATOMY ── */
+  .anatomy {
+    border: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .anatomy-top {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-on-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .anatomy-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .anatomy-top h4 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .anatomy-body {
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    background: #d8de00;
+    border: none;
+    border-radius: var(--radius);
+    padding: 1.15rem 1.5rem;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0;
+    margin: 1.5rem 0;
+    color: var(--ink);
+  }
+  .callout.lime {
+    background: #d8de00;
+    border: none;
+    color: var(--ink);
+  }
+
+  /* ── EXAMPLE ── */
+  .example-block {
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .example-block .tag {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .example-block p {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+  .example-block p + p { margin-top: 10px; }
+
+  /* ── SME TABLE ── */
+  .table-wrap {
+    border: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .sme-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+  .sme-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-on-blue);
+  }
+  .sme-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-on-blue);
+    vertical-align: top;
+    color: var(--ink-mid);
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+  .sme-table td:first-child {
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .sme-table tr:last-child td { border-bottom: none; }
+
+  /* ── GOTCHA ── */
+  .gotcha {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-on-blue);
+  }
+  .gotcha:last-child { border-bottom: none; }
+  .gotcha h3 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .gotcha p {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    letter-spacing: 0;
+  }
+
+  /* ── FAQ ── */
+  .faq-item {
+    border-bottom: 1px solid var(--border-on-blue);
+    cursor: pointer;
+    user-select: none;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    padding: 1.35rem 0;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .faq-q .tog {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink-dim);
+    transition: transform 0.2s, color 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .faq-item.open .tog { transform: rotate(45deg); color: var(--ink); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    letter-spacing: 0;
+    padding-bottom: 0;
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px;
+    padding-bottom: 1.35rem;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--bg-white);
+    border-top: 1px solid var(--border-on-white);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0;
+    color: var(--ink-muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .container { padding: 0 1.25rem; }
+    .hero { padding: 5rem 1.25rem 3.5rem; }
+    .slice { padding: 3.5rem 1.25rem; }
+    .step-row { grid-template-columns: 44px 1fr; gap: 1rem; }
+    .step-circle { width: 44px; height: 44px; font-size: 16px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO (blue) -->
+<div class="hero">
+  <h1>Impact Filter<br>PM Training Guide</h1>
+  <p>A step-by-step guide to using the intake assessment tool. Paste a brief, get a structured read. You make the call.</p>
+  <a class="hero-btn" href="#s1">Get started ↓</a>
+</div>
+
+
+<!-- 01 SETUP (white) -->
+<div class="slice white" id="s1">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">01 — Setup</span>
+    <h2>You need to have Claude first</h2>
+    <p class="lead">The Impact Filter runs inside a Claude Project. Here's how to get in.</p>
+
+    <div class="step-row">
+      <div class="step-circle">1</div>
+      <div class="step-text">
+        <h3>Get a Claude account</h3>
+        <p>Go to <strong>claude.ai</strong> and log in or sign up. A free account works. If your team has a Claude Team or Enterprise workspace, use that — your conversations are private to you either way.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-circle">2</div>
+      <div class="step-text">
+        <h3>Open the Impact Filter project</h3>
+        <p>In Claude, look for <strong>Impact Filter</strong> in your sidebar under Projects. If you don't see it, ask your team lead to share it with you. The project has all the instructions and account data baked in.</p>
+        <div class="step-img">
+          <svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+            <!-- Page title -->
+            <text x="32" y="44" font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#161638" letter-spacing="0">Projects</text>
+            <!-- Search bar -->
+            <rect x="28" y="62" width="464" height="44" rx="22" fill="#FFFFFF" stroke="#a0b0d8" stroke-width="2"/>
+            <text x="60" y="89" font-family="Inter,sans-serif" font-size="14" fill="#999990" letter-spacing="0">Search projects...</text>
+            <!-- Search icon -->
+            <circle cx="46" cy="84" r="7" fill="none" stroke="#999990" stroke-width="1.5"/>
+            <line x1="51" y1="89" x2="55" y2="93" stroke="#999990" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Tabs -->
+            <rect x="28" y="120" width="120" height="32" rx="16" fill="#e8e8e0"/>
+            <text x="88" y="141" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" text-anchor="middle" letter-spacing="0">Your projects</text>
+            <text x="178" y="141" font-family="Inter,sans-serif" font-size="13" fill="#999990" letter-spacing="0">Team</text>
+            <text x="256" y="141" font-family="Inter,sans-serif" font-size="13" fill="#999990" letter-spacing="0">Shared with you</text>
+            <!-- Project card -->
+            <rect x="28" y="168" width="464" height="148" rx="12" fill="#FFFFFF" stroke="#d8de00" stroke-width="2.5"/>
+            <!-- Project title -->
+            <text x="48" y="200" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#161638" letter-spacing="0">Impact Filter intake copilot</text>
+            <!-- Project description -->
+            <text x="48" y="224" font-family="Inter,sans-serif" font-size="13" fill="#70706a" letter-spacing="0">Paste raw intake material (briefs, emails, call notes,</text>
+            <text x="48" y="242" font-family="Inter,sans-serif" font-size="13" fill="#70706a" letter-spacing="0">Slack messages) and get a structured summary with</text>
+            <text x="48" y="260" font-family="Inter,sans-serif" font-size="13" fill="#70706a" letter-spacing="0">gap analysis, trigger flags, complexity signals, and S...</text>
+            <!-- Updated timestamp -->
+            <text x="48" y="296" font-family="Inter,sans-serif" font-size="12" fill="#999990" letter-spacing="0">Updated 4 minutes ago</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-circle">3</div>
+      <div class="step-text">
+        <h3>Start a new conversation</h3>
+        <p>Click <strong>New chat</strong> inside the project. Each new intake should be its own conversation so things stay clean and findable.</p>
+        <div class="step-img">
+          <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+            <!-- Back link -->
+            <text x="28" y="30" font-family="Inter,sans-serif" font-size="12" fill="#999990" letter-spacing="0">← All projects</text>
+            <!-- Project title -->
+            <text x="28" y="64" font-family="Inter,sans-serif" font-size="22" font-weight="700" fill="#161638" letter-spacing="0">Impact Filter intake copilot</text>
+            <!-- Share button -->
+            <rect x="460" y="46" width="64" height="28" rx="14" fill="none" stroke="#c0c0b8" stroke-width="1"/>
+            <text x="492" y="65" font-family="Inter,sans-serif" font-size="12" fill="#161638" text-anchor="middle" letter-spacing="0">Share</text>
+            <!-- Description -->
+            <text x="28" y="90" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">Paste raw intake material (briefs, emails, call notes, Slack messages) and get a</text>
+            <text x="28" y="106" font-family="Inter,sans-serif" font-size="12" fill="#70706a" letter-spacing="0">structured summary with gap analysis, trigger flags, and SME recommendations.</text>
+            <!-- Meta line -->
+            <text x="28" y="128" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Created by you · Shared with your org</text>
+
+            <!-- Chat input box - highlighted -->
+            <rect x="28" y="148" width="400" height="80" rx="10" fill="#FFFFFF" stroke="#d8de00" stroke-width="2.5"/>
+            <text x="50" y="174" font-family="Inter,sans-serif" font-size="13" fill="#b0b0a8" letter-spacing="0">Type / for skills</text>
+            <!-- + button -->
+            <text x="50" y="210" font-family="Inter,sans-serif" font-size="18" fill="#b0b0a8" letter-spacing="0">+</text>
+            <!-- Model selector -->
+            <text x="310" y="212" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Opus 4.6  Extended ▾</text>
+
+            <!-- Arrow + label pointing to input -->
+            <text x="460" y="178" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">Paste your</text>
+            <text x="460" y="196" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">brief here</text>
+            <line x1="455" y1="186" x2="432" y2="186" stroke="#161638" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <circle cx="432" cy="186" r="3" fill="#161638"/>
+
+            <!-- Your chats / Activity tabs -->
+            <rect x="28" y="252" width="96" height="28" rx="14" fill="#e8e8e0"/>
+            <text x="76" y="271" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#161638" text-anchor="middle" letter-spacing="0">Your chats</text>
+            <text x="150" y="271" font-family="Inter,sans-serif" font-size="12" fill="#999990" letter-spacing="0">Activity</text>
+            <!-- Privacy note -->
+            <text x="428" y="271" font-family="Inter,sans-serif" font-size="11" fill="#999990" text-anchor="end" letter-spacing="0">Your chats are private until shared</text>
+
+            <!-- Previous chat entries -->
+            <line x1="28" y1="290" x2="428" y2="290" stroke="#e0e0d8" stroke-width="1"/>
+            <text x="28" y="312" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#161638" letter-spacing="0">Spotify press inquiry — intake</text>
+            <text x="28" y="330" font-family="Inter,sans-serif" font-size="13" fill="#161638" letter-spacing="0">McDonald's franchisee guides — intake</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-circle">4</div>
+      <div class="step-text">
+        <h3>That's it</h3>
+        <p>No plugins. No extensions. No configuration. Paste your intake material and the tool gives you a structured assessment like this:</p>
+        <div class="step-img">
+          <svg viewBox="0 0 620 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:12px;margin-top:16px;background:#f5f5f0;">
+            <!-- User message bubble -->
+            <rect x="180" y="16" width="420" height="60" rx="10" fill="#e8e8e0"/>
+            <text x="200" y="40" font-family="Inter,sans-serif" font-size="12" fill="#161638" letter-spacing="0">Got an email from Spotify. They want visual assets for a</text>
+            <text x="200" y="56" font-family="Inter,sans-serif" font-size="12" fill="#161638" letter-spacing="0">press feature. Need a data viz, album cover, social assets...</text>
+            <!-- User label -->
+            <text x="580" y="96" font-family="Inter,sans-serif" font-size="10" fill="#999990" text-anchor="end" letter-spacing="0">You</text>
+
+            <!-- Claude response -->
+            <!-- Claude icon -->
+            <rect x="20" y="112" width="24" height="24" rx="6" fill="#d4a574"/>
+            <text x="32" y="129" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0">C</text>
+
+            <!-- Response card -->
+            <rect x="20" y="144" width="580" height="360" rx="10" fill="#FFFFFF"/>
+
+            <!-- Summary header section -->
+            <text x="40" y="170" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#161638" letter-spacing="0">Impact Filter — Spotify</text>
+
+            <!-- Summary table -->
+            <line x1="40" y1="180" x2="580" y2="180" stroke="#e8e8e0" stroke-width="1"/>
+            <text x="40" y="200" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Client</text>
+            <text x="140" y="200" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">Spotify</text>
+            <text x="40" y="218" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Project</text>
+            <text x="140" y="218" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">Press feature — visual assets for shared listening history</text>
+            <text x="40" y="236" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Path</text>
+            <rect x="140" y="224" width="50" height="18" rx="9" fill="#d8de00"/>
+            <text x="165" y="237" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#161638" text-anchor="middle" letter-spacing="0">Path B</text>
+            <text x="200" y="237" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">— Needs quick alignment on visual direction</text>
+            <text x="40" y="256" font-family="Inter,sans-serif" font-size="11" fill="#999990" letter-spacing="0">Account team</text>
+            <text x="140" y="256" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">DD: Gustavo · PM: Matthew</text>
+
+            <!-- What we know section -->
+            <line x1="40" y1="272" x2="580" y2="272" stroke="#e8e8e0" stroke-width="1"/>
+            <text x="40" y="292" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#161638" letter-spacing="0">What we know</text>
+            <text x="40" y="312" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">✅ Deliverables</text>
+            <text x="160" y="312" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">Data viz, album cover, social/media assets</text>
+            <text x="40" y="330" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">❌ Budget</text>
+            <text x="160" y="330" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">Not stated</text>
+            <text x="40" y="348" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">❌ Timeline</text>
+            <text x="160" y="348" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">Not stated</text>
+            <text x="40" y="366" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">❌ Clarity</text>
+            <text x="160" y="366" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">No visual direction or style references</text>
+
+            <!-- Risk flags -->
+            <line x1="40" y1="382" x2="580" y2="382" stroke="#e8e8e0" stroke-width="1"/>
+            <text x="40" y="402" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#161638" letter-spacing="0">Risk flags</text>
+            <text x="40" y="422" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">🟡 Strategic in nature — visual direction undefined</text>
+            <text x="40" y="440" font-family="Inter,sans-serif" font-size="11" fill="#161638" letter-spacing="0">🟡 Cross-functional — EVB, SJR, Spotify editorial involved</text>
+
+            <!-- Questions -->
+            <line x1="40" y1="456" x2="580" y2="456" stroke="#e8e8e0" stroke-width="1"/>
+            <text x="40" y="476" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#161638" letter-spacing="0">Questions to resolve</text>
+            <text x="40" y="496" font-family="Inter,sans-serif" font-size="11" fill="#70706a" letter-spacing="0">1. Can you share an approximate budget range?</text>
+
+            <!-- Fade hint -->
+            <rect x="20" y="484" width="580" height="20" rx="0" fill="url(#fade)"/>
+            <defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.9"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Important:</strong> If you paste a brief into a regular Claude chat (not the project), it won't know the Impact Filter framework, the account team structure, or the SME logic. Always use the project.
+    </div>
+  </div></div>
+</div>
+
+
+<!-- 02 HOW TO USE (blue) -->
+<div class="slice blue">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">02 — How to use it</span>
+    <h2>Paste anything. Get a structured assessment.</h2>
+    <p class="lead">The tool reads messy inputs and returns clean, scannable analysis.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3><span class="card-dot" style="background:#2eaa6e;"></span>Works great</h3>
+        <p>Client emails, Slack messages, brief docs, call notes, meeting summaries, intake forms, forwarded threads.</p>
+      </div>
+      <div class="card">
+        <h3><span class="card-dot" style="background:var(--yellow);"></span>Also works</h3>
+        <p>Partial info. "McDonald's wants two slide guides, ~42 slides, due end of March." The tool flags what's missing.</p>
+      </div>
+      <div class="card">
+        <h3><span class="card-dot" style="background:#d45c5c;"></span>Doesn't work</h3>
+        <p>Empty messages with no project details. The tool needs something to analyze — give it the raw material.</p>
+      </div>
+      <div class="card">
+        <h3><span class="card-dot" style="background:#5090d0;"></span>File attachments</h3>
+        <p>Drag and drop PDFs, Word docs, or PowerPoints into the chat. The tool reads them directly.</p>
+      </div>
+    </div>
+
+    <div class="example-block">
+      <span class="tag">Example intake</span>
+      <p><strong>You paste:</strong> "Got an email from Spotify. They want visual assets for a press feature — celebrating a couple's relationship through shared listening history. Need a data viz, custom album cover, and social/media assets. EVB, SJR, and Spotify editorial are involved. No budget or timeline mentioned yet."</p>
+      <p><strong>You get:</strong> A full Impact Filter assessment — account team (DD: Gustavo, PM: Matthew), gap analysis (budget ❌, timeline ❌, visual direction ❌), risk flags, Path B recommendation, and copy-ready questions for the client.</p>
+    </div>
+
+    <div class="callout lime">
+      <strong>Follow-ups work too.</strong> After the initial assessment, add info in the same chat: "Budget confirmed at $15k, deadline is May 15th." The tool updates its read. Ask it to regenerate the full summary if you want a clean version.
+    </div>
+  </div></div>
+</div>
+
+
+<!-- 03 OUTPUT (white) -->
+<div class="slice white">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">03 — Reading the output</span>
+    <h2>What the assessment looks like</h2>
+    <p class="lead">Every assessment has two parts: a quick-scan summary header and a detailed breakdown.</p>
+
+    <div class="anatomy">
+      <div class="anatomy-top">
+        <div class="anatomy-dot" style="background:#2eaa6e;"></div>
+        <h4>Summary header</h4>
+      </div>
+      <div class="anatomy-body">The 10-second read. Client name, project description, type of work, recommended path (A/B/C with one sentence why), account team (DD + PM), and any SMEs flagged. If any field shows ⚠️, confirm it yourself.</div>
+    </div>
+    <div class="anatomy">
+      <div class="anatomy-top">
+        <div class="anatomy-dot" style="background:#5090d0;"></div>
+        <h4>What we know / what's missing</h4>
+      </div>
+      <div class="anatomy-body">Six fields checked: budget, visibility, deliverables, timeline, clarity, capabilities. Each gets ✅ confirmed, ⚠️ provisional, or ❌ missing.</div>
+    </div>
+    <div class="anatomy">
+      <div class="anatomy-top">
+        <div class="anatomy-dot" style="background:#d45c5c;"></div>
+        <h4>Risk flags</h4>
+      </div>
+      <div class="anatomy-body">🔴 = confirmed. 🟡 = provisional. <strong>Triggers</strong> are strategic concerns (high-impact visibility, ambiguous direction, brand-defining). <strong>Complexity flags</strong> are operational (unclear scope, constrained timeline, cross-functional).</div>
+    </div>
+    <div class="anatomy">
+      <div class="anatomy-top">
+        <div class="anatomy-dot" style="background:var(--yellow);"></div>
+        <h4>Consider consulting</h4>
+      </div>
+      <div class="anatomy-body">The account DD is always first. SMEs appear only when specific triggers fired. Each entry includes the key question to ask yourself.</div>
+    </div>
+    <div class="anatomy">
+      <div class="anatomy-top">
+        <div class="anatomy-dot" style="background:var(--ink-dim);"></div>
+        <h4>Questions to resolve + next steps</h4>
+      </div>
+      <div class="anatomy-body">Client-ready questions you can copy-paste. Plus 2–4 action items. Only covers what's actually missing.</div>
+    </div>
+  </div></div>
+</div>
+
+
+<!-- 04 PATHS (blue) -->
+<div class="slice blue">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">04 — Paths</span>
+    <h2>Path A, B, or C</h2>
+    <p class="lead">Every assessment recommends one of three paths. This is a suggestion — you make the final call.</p>
+
+    <div class="path-card">
+      <span class="path-pill">Path A</span>
+      <h3>Standard execution</h3>
+      <p class="desc">The brief is clear. The work follows an existing template or system. No big decisions needed. Just execute.</p>
+      <div class="examples"><strong>Typical examples:</strong> Resize assets in existing template. Reformat a deck. Minor content swaps with clear instructions. Export or file clean-up.</div>
+    </div>
+    <div class="path-card">
+      <span class="path-pill">Path B</span>
+      <h3>Brief consultation</h3>
+      <p class="desc">Mostly executable, but needs a quick PM/DD/PD alignment first. Higher impact or more complex than Path A. A short check-in saves rework.</p>
+      <div class="examples"><strong>Typical examples:</strong> New asset type inside an existing system. Short timeline with unclear audience. Mixed stakeholder input on a doable project.</div>
+    </div>
+    <div class="path-card">
+      <span class="path-pill">Path C</span>
+      <h3>Full strategic engagement</h3>
+      <p class="desc">Big decisions before design starts. Net-new brand, narrative, positioning, or concept work. A creative lead shapes direction first.</p>
+      <div class="examples"><strong>Typical examples:</strong> Full rebrand. Executive keynote with unclear message. Flagship campaign. Foundational template system.</div>
+    </div>
+
+    <div class="callout lime">
+      <strong>Default is A.</strong> The tool only recommends B or C when it detects specific triggers. If it goes higher, read the "why" — it's flagging something concrete.
+    </div>
+  </div></div>
+</div>
+
+
+<!-- 05 SMES (white) -->
+<div class="slice white">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">05 — Subject matter experts</span>
+    <h2>Who gets flagged and when</h2>
+    <p class="lead">The account DD is always the primary consultant. SMEs surface only when triggers warrant it.</p>
+
+    <div class="table-wrap">
+      <table class="sme-table">
+        <thead><tr><th>Name</th><th>Domain</th><th>Triggered when</th></tr></thead>
+        <tbody>
+          <tr><td>Gina</td><td>Strategic brand systems</td><td>Work defines or evolves the brand. Strategy before design. Integrated campaign strategy. Budget ≥ $50k.</td></tr>
+          <tr><td>Laura</td><td>Content strategy</td><td>Messaging is new/undefined. Content from scratch. Launch/GTM. High-visibility narrative.</td></tr>
+          <tr><td>Lucía</td><td>Visual brand systems</td><td>New visual direction. Must scale as system. Campaign visuals. High-visibility design quality.</td></tr>
+          <tr><td>Gustavo</td><td>AI creative</td><td>Rapid multi-direction exploration. AI concepting/prototyping. Brand-to-prompt translation.</td></tr>
+          <tr><td>Aislinn</td><td>Digital production</td><td>Website/app build. Technical QA. Accessibility compliance. Interactive assets.</td></tr>
+          <tr><td>Mer</td><td>Production & rollout</td><td>Large-scale rollout. Template architecture. Print/large-format. Accuracy critical.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout lime">
+      <strong>Budget thresholds matter.</strong> Gina: $50k, Lucía: $30k, Laura: $20k, Aislinn: $5k. If budget is unknown, those thresholds can't be checked — the tool marks the signal as provisional.
+    </div>
+  </div></div>
+</div>
+
+
+<!-- 06 TIPS (blue) -->
+<div class="slice blue">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">06 — Tips and gotchas</span>
+    <h2>Things to keep in mind</h2>
+    <p class="lead">Practical advice and common misunderstandings.</p>
+
+    <div class="card-grid" style="margin-bottom:2rem;">
+      <div class="card">
+        <h3>More context = better output</h3>
+        <p>Richer input means fewer provisional flags. Paste the client email and your internal notes together.</p>
+      </div>
+      <div class="card">
+        <h3>One project per chat</h3>
+        <p>Don't paste three intakes into one conversation. Start fresh for each project.</p>
+      </div>
+      <div class="card">
+        <h3>Copy the questions</h3>
+        <p>"Questions to resolve" is client-friendly on purpose. Copy them straight into your next email.</p>
+      </div>
+      <div class="card">
+        <h3>You decide, always</h3>
+        <p>The tool advises. If it says Path B and you think A, go with your judgment. You know the account.</p>
+      </div>
+    </div>
+
+    <div class="gotcha">
+      <h3>Provisional doesn't mean wrong</h3>
+      <p>🟡 flags and ⚠️ markers mean the intake didn't mention something. It's saying "check this," not "there's a problem."</p>
+    </div>
+    <div class="gotcha">
+      <h3>"External" doesn't mean "high-impact"</h3>
+      <p>Public-facing or social work isn't automatically high-impact. That term means: C-suite audience, full rebrand, flagship campaign, major conference launch.</p>
+    </div>
+    <div class="gotcha">
+      <h3>The six basics always get checked</h3>
+      <p>Budget, visibility, deliverables, timeline, clarity, capabilities. Every intake — even incomplete ones — gets assessed against all six.</p>
+    </div>
+    <div class="gotcha">
+      <h3>You can update the assessment</h3>
+      <p>Got new info? Paste it in the same conversation. The tool adjusts. Say "regenerate the full summary" for a clean version.</p>
+    </div>
+  </div></div>
+</div>
+
+
+<!-- 07 FAQ (white) -->
+<div class="slice white">
+  <div class="container"><div class="narrow">
+    <span class="section-eyebrow">07 — FAQ</span>
+    <h2>Common questions</h2>
+    <p class="lead">Answers to the things PMs actually ask.</p>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if the client isn't in the account list?<span class="tog">+</span></div>
+      <div class="faq-a">The tool flags it as an unknown account and notes the DD needs to be confirmed. It still runs the full analysis.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Can I run the filter on something I already scoped?<span class="tog">+</span></div>
+      <div class="faq-a">Yes. It's a useful sanity check. Paste the brief and see if the tool flags anything you missed.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if I disagree with the path recommendation?<span class="tog">+</span></div>
+      <div class="faq-a">Go with your judgment. You can ask "Why did you recommend Path B?" and it'll explain.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if I get new info after the assessment?<span class="tog">+</span></div>
+      <div class="faq-a">Add it in the same conversation. The tool updates. Ask to regenerate the summary for a clean version.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Can I use this for small or simple projects?<span class="tog">+</span></div>
+      <div class="faq-a">Yes. Simple projects get Path A, no flags, 10 seconds. Still useful as a checkpoint.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Who can see my conversations?<span class="tog">+</span></div>
+      <div class="faq-a">Only you, unless you share them. Claude Projects keep conversations private to the individual user.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What are "the six basics"?<span class="tog">+</span></div>
+      <div class="faq-a">Budget, visibility, deliverables, timeline, clarity, and capabilities. Each gets ✅ confirmed, ⚠️ provisional, or ❌ missing.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What are SMEs?<span class="tog">+</span></div>
+      <div class="faq-a">Subject Matter Experts: Gina (brand strategy), Laura (content), Lucía (visual systems), Gustavo (AI creative), Aislinn (digital), Mer (production/rollout).</div>
+    </div>
+  </div></div>
+</div>
+
+
+<!-- FOOTER (white) -->
+<div class="footer">
+  SketchDeck — Impact Filter · Internal PM training · April 2026
+</div>
+
+</body>
+</html>
